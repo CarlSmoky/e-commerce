@@ -1,7 +1,17 @@
 class OrdersController < ApplicationController
 
   def show
+    # SELECT  "orders".* FROM "orders" WHERE "orders"."id" = $1 LIMIT 1  [["id", 1]]
+    #<Order id: 1, total_cents: 2500, created_at: "2022-01-04 23:57:34", updated_at: "2022-01-04 23:57:34", stripe_charge_id: "ch_3KEMskL1gojLHJyB0mzyjRrB", email: "kvirani@gmail.com">
     @order = Order.find(params[:id])
+    
+    # SELECT "line_items".* FROM "line_items" WHERE "line_items"."order_id" = $1  [["order_id", 1]]
+    #<Order id: 1, total_cents: 2500, created_at: "2022-01-04 23:57:34", updated_at: "2022-01-04 23:57:34", stripe_charge_id: "ch_3KEMskL1gojLHJyB0mzyjRrB", email: "kvirani@gmail.com">
+    @line_items = @order.line_items
+    
+    # SELECT  "products".* FROM "products" WHERE "products"."id" = $1 LIMIT 1  [["id", 4]]
+    #<Product id: 4, name: "Hipster Socks", description: "Diy food truck twee letterpress photo booth biodie...", image: "apparel4.jpg", price_cents: 2500, quantity: 8, created_at: "2022-01-04 23:37:51", updated_at: "2022-01-04 23:37:51", category_id: 1>
+    @products = @line_items.map {|line_item| Product.find(line_item.product_id)}
   end
 
   def create
