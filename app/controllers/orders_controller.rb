@@ -1,5 +1,8 @@
 class OrdersController < ApplicationController
 
+  # before_filter :authorize
+
+
   def show
     # SELECT  "orders".* FROM "orders" WHERE "orders"."id" = $1 LIMIT 1  [["id", 1]]
     #<Order id: 1, total_cents: 2500, created_at: "2022-01-04 23:57:34", updated_at: "2022-01-04 23:57:34", stripe_charge_id: "ch_3KEMskL1gojLHJyB0mzyjRrB", email: "kvirani@gmail.com">
