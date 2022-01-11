@@ -37,10 +37,56 @@ RSpec.describe User, type: :model do
   end
 
   describe '.authenticate_with_credentials' do
-    it "is null if password doesn't match" do
-      @user = User.create(first_name: "Noran", last_name: "Mobila", email: "k@r.example.com", password: "password", password_confirmation: "uso")
-      puts @user
-      expect(@user).to be_nil
+    it "is authenticate with the valid email and password" do
+      user1 = User.create(first_name: "Noran", last_name: "Mobila", email: "k@r.example.com", password: "password", password_confirmation: "password")
+      puts user1
+      puts user1.errors.full_messages
+      user =User.authenticate_with_credentials("k@r.example.com", "password")
+      
+      expect(user).to be_present
+    end
+
+    it "is authenticate with the valid email and invalid password" do
+      user1 = User.create(first_name: "Noran", last_name: "Mobila", email: "k@r.example.com", password: "password", password_confirmation: "password")
+      puts user1
+      puts user1.errors.full_messages
+      user =User.authenticate_with_credentials("k@r.example.com", "uso")
+      
+      expect(user).to be_nil
+    end
+
+    it "is authenticate with the invalid email and password" do
+      user1 = User.create(first_name: "Noran", last_name: "Mobila", email: "k@r.example.com", password: "password", password_confirmation: "password")
+      puts user1
+      puts user1.errors.full_messages
+      user =User.authenticate_with_credentials("j@r.example.com", "password")
+      
+      expect(user).to be_nil
+    end
+
+    it "is authenticate with the valid email with space and password" do
+      user1 = User.create(first_name: "Noran", last_name: "Mobila", email: "k@r.example.com", password: "password", password_confirmation: "password")
+      puts user1
+      puts user1.errors.full_messages
+      user =User.authenticate_with_credentials(" k@r.example.com ", "password")
+      
+      expect(user).to be_present
+    end
+
+    it "is authenticate with the valid email with uppercase and password" do
+      user1 = User.create(first_name: "Noran", last_name: "Mobila", email: "k@r.example.com", password: "password", password_confirmation: "password")
+      puts user1
+      puts user1.errors.full_messages
+      user =User.authenticate_with_credentials("K@r.exaMple.coM", "password")
+      expect(user).to be_present
+    end
+
+    it "is authenticate with the valid email with space uppercase and password" do
+      user1 = User.create(first_name: "Noran", last_name: "Mobila", email: "k@r.example.com", password: "password", password_confirmation: "password")
+      puts user1
+      puts user1.errors.full_messages
+      user =User.authenticate_with_credentials(" k@r.examPle.coM ", "password")
+      expect(user).to be_present
     end
   end
 end
