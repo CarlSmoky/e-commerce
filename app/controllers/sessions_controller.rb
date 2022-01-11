@@ -2,6 +2,15 @@ class SessionsController < ApplicationController
   def new
   end
 
+  def authenticate_with_credentials(email, password)
+    user = User.find_by_email(email)
+    if user && user.authenticate(password)
+      user
+    else
+      nil
+    end
+  end
+
   def create
     user = User.find_by_email(params[:email])
     # If the user exists AND the password entered is correct.
@@ -14,7 +23,17 @@ class SessionsController < ApplicationController
     # If user's login doesn't work, send them back to the login form.
       redirect_to '/login'
     end
+
+    # if user = User.authenticate_with_credentials(params[:email], params[:password])
+    #   session[:user_id] = user.id
+    #   redirect_to '/'
+    # else
+    #   redirect_to '/login'
+    # end
+
   end
+
+  
 
   def destroy
     session[:user_id] = nil
