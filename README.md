@@ -2,6 +2,16 @@
 
 A mini e-commerce application built with Rails 4.2 for purposes of teaching Rails by example.
 
+!["Screenshot of Top page"](https://github.com/CarlSmoky/e-commerce/blob/master/docs/Products%20page%20with%20login.png?raw=true)
+
+!["Screenshot of Cart page"](https://github.com/CarlSmoky/e-commerce/blob/master/docs/Cart%20page.png?raw=true)
+
+!["Screenshot of Login page"](https://github.com/CarlSmoky/e-commerce/blob/master/docs/login%20page.png?raw=true)
+
+!["Screenshot of Mobile size"](https://github.com/CarlSmoky/e-commerce/blob/master/docs/mobile%20screen.png?raw=true)
+
+!["Screenshot of Dropdown"](https://github.com/CarlSmoky/e-commerce/blob/master/docs/Drop%20down.png?raw=true)
+
 ## Additional Steps for Apple M1 Machines
 
 1. Make sure that you are runnning Ruby 2.6.6 (`ruby -v`)
